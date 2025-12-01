@@ -31,7 +31,7 @@ export const COURSES: Course[] = [
     category: 'Tin học',
     grade: 'Mọi lứa tuổi',
     description: 'Thành thạo kỹ năng tin học văn phòng cần thiết cho học tập và công việc.',
-    image: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/anhkhoahoc/gs6lv1.png',
     duration: '15 tuần - 45 buổi',
     students: 120,
     format: 'Online & Offline',
@@ -44,28 +44,27 @@ export const COURSES: Course[] = [
   },
   {
     id: 'c2',
-    title: 'Luyện thi Tiếng Anh Cambridge',
-    category: 'Ngoại ngữ',
-    grade: 'Tiểu học & THCS',
-    description: 'Phát triển toàn diện 4 kỹ năng Nghe - Nói - Đọc - Viết chuẩn quốc tế.',
-    image: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '6 tháng - 72 buổi',
+    title: 'Tin Học văn phòng nâng cao',
+    category: 'Tin học',
+    grade: 'THCS & Sinh viên',
+    description: 'Thành thạo kỹ năng tin học văn phòng cần thiết cho học tập và công việc.',
+    image: '/anhkhoahoc/gs6lv2.png',
+    duration: '20 tuần - 60 buổi',
     students: 250,
     format: 'Offline',
     curriculum: [
-      'Chuẩn hóa phát âm IPA',
-      'Giao tiếp phản xạ theo chủ đề',
-      'Luyện đề Starters, Movers, Flyers',
-      'Thuyết trình tiếng Anh tự tin'
+      'Giáo trình Máy tính nâng cao',
+      'Giáo trình Word nâng cao',
+      'Giáo Trình Bảng Tính Excel Nâng Cao'
     ]
   },
   {
     id: 'c3',
-    title: 'Toán Tư Duy Logic',
-    category: 'Toán học',
-    grade: 'Lớp 6-9',
-    description: 'Rèn luyện tư duy logic, kỹ năng giải quyết vấn đề qua toán học.',
-    image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    title: 'Tin Học văn phòng Chuyên Sâu',
+    category: 'Tin học',
+    grade: 'THCS & Sinh viên',
+    description: 'Thành thạo kỹ năng tin học văn phòng cần thiết cho học tập và công việc.',
+    image: '/anhkhoahoc/gs6lv3.png',
     duration: '3 tháng - 24 buổi',
     students: 85,
     format: 'Online & Offline',
@@ -78,19 +77,19 @@ export const COURSES: Course[] = [
   },
   {
     id: 'c4',
-    title: 'Luyện thi Vật Lý Chuyên Sâu',
-    category: 'Khoa học tự nhiên',
+    title: 'Tin Học Trẻ Em, Học Sinh',
+    category: 'Tin học',
     grade: 'Lớp 10-12',
     description: 'Hệ thống kiến thức trọng tâm, chiến thuật làm bài thi hiệu quả.',
-    image: 'https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    image: '/anhkhoahoc/gs6lv3.png',
     duration: '4 tháng - 32 buổi',
     students: 90,
     format: 'Offline',
     curriculum: [
-      'Cơ học & Nhiệt học nâng cao',
-      'Điện từ học ứng dụng',
-      'Quang học và Vật lý hạt nhân',
-      'Luyện giải đề thi Đại học các năm'
+      'Giáo trình lập trình Scratch',
+      'Giáo trình ứng dụng tin học cơ bản',
+      'Giáo trình ứng dụng tin học nâng cao',
+      'Giáo trình lập trình Python cho trẻ em'
     ]
   }
 ];
