@@ -36,11 +36,11 @@ const Header: React.FC = () => {
         {!isScrolled && (
           <div className="hidden lg:flex justify-between items-center text-sm text-gray-600 mb-2 border-b border-gray-100 pb-2">
             <div className="flex gap-4">
-              <span className="flex items-center gap-1"><Phone size={14} /> Hotline: 0912.345.678</span>
-              <span>Email: contact@erg.edu.vn</span>
+              <span className="flex items-center gap-1"><Phone size={14} /> Hotline: 0766.144.888</span>
+              <span>Email: info.eduerg@gmail.com</span>
             </div>
             <div className="flex gap-3">
-              <a href="#" className="hover:text-blue-600 transition-colors"><Facebook size={16} /></a>
+              <a href="https://www.facebook.com/eduriseerg" className="hover:text-blue-600 transition-colors"><Facebook size={16} /></a>
               <a href="#" className="hover:text-red-600 transition-colors"><Youtube size={16} /></a>
             </div>
           </div>
