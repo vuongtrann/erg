@@ -1,4 +1,5 @@
 import { Course, NavItem, NewsItem, Teacher, Testimonial, RoadmapSection } from '@/data/types';
+import { ShieldCheck, UserCheck, FileText, Monitor, Sun, MessageCircle } from 'lucide-react';
 
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Trang chủ', path: '/' },
@@ -26,86 +27,100 @@ export const HERO_SLIDES = [
 export const COURSES: Course[] = [
   {
     id: 'c1',
-    title: 'Toán tư duy logic',
-    category: 'Toán học',
-    grade: 'Lớp 6-9',
-    description: 'Phát triển tư duy logic, rèn luyện kỹ năng giải quyết vấn đề thông qua các bài toán thực tế.',
-    image: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '3 tháng',
+    title: 'Tin Học văn phòng Cơ Bản',
+    category: 'Tin học',
+    grade: 'Mọi lứa tuổi',
+    description: 'Thành thạo kỹ năng tin học văn phòng cần thiết cho học tập và công việc.',
+    image: '/anhkhoahoc/gs6lv1.png',
+    duration: '15 tuần - 45 buổi',
     students: 120,
+    format: 'Online & Offline',
+    curriculum: [
+      'Giáo trình Máy tính cơ bản',
+      'Giáo trình soạn thảo văn bản hành chính cơ bản',
+      'Giáo Trình Bảng Tính Excel cơ bản',
+      'Giáo trình Thuyết trình với PowerPoint'
+    ]
   },
   {
     id: 'c2',
-    title: 'Tiếng Anh giao tiếp',
-    category: 'Ngoại ngữ',
-    grade: 'Mọi lứa tuổi',
-    description: 'Tự tin giao tiếp với người nước ngoài, chuẩn hóa phát âm và ngữ điệu.',
-    image: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '6 tháng',
+    title: 'Tin Học văn phòng nâng cao',
+    category: 'Tin học',
+    grade: 'THCS & Sinh viên',
+    description: 'Thành thạo kỹ năng tin học văn phòng cần thiết cho học tập và công việc.',
+    image: '/anhkhoahoc/gs6lv2.png',
+    duration: '20 tuần - 60 buổi',
     students: 250,
+    format: 'Offline',
+    curriculum: [
+      'Giáo trình Máy tính nâng cao',
+      'Giáo trình Word nâng cao',
+      'Giáo Trình Bảng Tính Excel Nâng Cao'
+    ]
   },
   {
     id: 'c3',
-    title: 'Luyện thi Vật Lý',
-    category: 'Khoa học tự nhiên',
-    grade: 'Lớp 10-12',
-    description: 'Nắm vững kiến thức nền tảng và nâng cao, chinh phục các kỳ thi quan trọng.',
-    image: 'https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '4 tháng',
+    title: 'Tin Học văn phòng Chuyên Sâu',
+    category: 'Tin học',
+    grade: 'THCS & Sinh viên',
+    description: 'Thành thạo kỹ năng tin học văn phòng cần thiết cho học tập và công việc.',
+    image: '/anhkhoahoc/gs6lv3.png',
+    duration: '3 tháng - 24 buổi',
     students: 85,
+    format: 'Online & Offline',
+    curriculum: [
+      'Phương pháp tư duy số học',
+      'Hình học trực quan sinh động',
+      'Logic giải quyết vấn đề thực tế',
+      'Luyện tập qua các trò chơi trí tuệ'
+    ]
   },
   {
     id: 'c4',
-    title: 'Hóa học ứng dụng',
-    category: 'Khoa học tự nhiên',
-    grade: 'Lớp 8-12',
-    description: 'Khám phá thế giới hóa học đầy màu sắc qua các thí nghiệm thực hành thú vị.',
-    image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '4 tháng',
+    title: 'Tin Học Trẻ Em, Học Sinh',
+    category: 'Tin học',
+    grade: 'Lớp 10-12',
+    description: 'Hệ thống kiến thức trọng tâm, chiến thuật làm bài thi hiệu quả.',
+    image: '/anhkhoahoc/gs6lv3.png',
+    duration: '4 tháng - 32 buổi',
     students: 90,
-  },
-  {
-    id: 'c5',
-    title: 'Ngữ văn cảm thụ',
-    category: 'Khoa học xã hội',
-    grade: 'Lớp 6-12',
-    description: 'Khơi gợi tình yêu văn học, rèn luyện kỹ năng viết và cảm thụ tác phẩm.',
-    image: 'https://images.unsplash.com/photo-1457369804613-52c61a468e7d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: 'Quanh năm',
-    students: 150,
-  },
-  {
-    id: 'c6',
-    title: 'Lập trình cơ bản',
-    category: 'Công nghệ',
-    grade: 'Lớp 5-12',
-    description: 'Bước đầu làm quen với tư duy lập trình, tạo ra các sản phẩm công nghệ nhỏ.',
-    image: 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-    duration: '6 tháng',
-    students: 200,
-  },
+    format: 'Offline',
+    curriculum: [
+      'Giáo trình lập trình Scratch',
+      'Giáo trình ứng dụng tin học cơ bản',
+      'Giáo trình ứng dụng tin học nâng cao',
+      'Giáo trình lập trình Python cho trẻ em'
+    ]
+  }
 ];
 
 export const TEACHERS: Teacher[] = [
   {
     id: 't1',
-    name: 'ThS. Nguyễn Văn A',
+    name: 'Ngô Xuân Trúc',
     subject: 'Toán học',
-    image: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+    image: '/teacher/mrtruc.jpg',
     bio: '10 năm kinh nghiệm giảng dạy tại các trường chuyên, tác giả nhiều đầu sách tham khảo.',
   },
   {
     id: 't2',
-    name: 'Cô Trần Thị B',
+    name: 'Trần Tướng Tuấn',
     subject: 'Tiếng Anh',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+    image: '/teacher/mr3t.jpg',
     bio: 'IELTS 8.5, phương pháp giảng dạy hiện đại, truyền cảm hứng.',
   },
   {
     id: 't3',
-    name: 'TS. Lê Văn C',
+    name: 'Trần Quốc Vương',
     subject: 'Vật Lý',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80',
+    image: '/teacher/mrvuong.jpg',
+    bio: 'Chuyên gia luyện thi Olympic, nhiệt huyết và tận tâm với học sinh.',
+  },
+  {
+    id: 't4',
+    name: 'Trần Quốc Vương',
+    subject: 'Vật Lý',
+    image: '/teacher/mrvuong.jpg',
     bio: 'Chuyên gia luyện thi Olympic, nhiệt huyết và tận tâm với học sinh.',
   },
 ];
@@ -242,4 +257,43 @@ export const TRAINING_GOALS = [
   'Tăng năng suất làm việc và khả năng ứng dụng thực tế',
   'Chuẩn bị kiến thức vững chắc để thi chứng chỉ quốc tế',
   'Phát triển tư duy và kỹ năng công nghệ cho học sinh'
+];
+
+export const WHY_CHOOSE_US = [
+  {
+    icon: ShieldCheck,
+    title: 'Chương trình học bài bản',
+    description: 'Lộ trình học được thiết kế chuyên nghiệp, từ cơ bản đến nâng cao, bám sát các tiêu chuẩn quốc tế hoặc nhu cầu thực tế',
+    color: 'bg-blue-500'
+  },
+  {
+    icon: UserCheck,
+    title: 'Giáo viên chuyên môn cao',
+    description: 'Đội ngũ giáo viên là chuyên gia, có kinh nghiệm thực tế, giúp bạn học được kiến thức sát với công việc.',
+    color: 'bg-blue-500'
+  },
+  {
+    icon: FileText,
+    title: 'Tăng cơ hội việc làm và thăng tiến',
+    description: 'Kỹ năng tin học, đặc biệt là tin học văn phòng (Word, Excel, PowerPoint) và các chứng chỉ quốc tế (MOS, IC3) là yêu cầu cơ bản của các công việc',
+    color: 'bg-blue-500'
+  },
+  {
+    icon: Monitor,
+    title: 'Cơ sở vật chất hiện đại',
+    description: 'Được cung cấp máy tính và các trang thiết bị học tập phù hợp, tiện nghi.',
+    color: 'bg-blue-500'
+  },
+  {
+    icon: Sun,
+    title: 'Thời gian học linh hoạt',
+    description: 'Cho phép bạn lựa chọn hoặc tự sắp xếp lịch học phù hợp với thời gian rảnh, không làm ảnh hưởng đến công việc hoặc tập hiện tại.',
+    color: 'bg-blue-500'
+  },
+  {
+    icon: MessageCircle,
+    title: 'Hỗ trợ và tương tác',
+    description: 'Dễ dàng trao đổi, hỏi đáp và nhận được sự hỗ trợ nhiệt tình từ giáo viên và trung tâm trong suốt quá trình học, thậm chí cả sau khi kết thúc khóa học.',
+    color: 'bg-blue-500'
+  }
 ];
