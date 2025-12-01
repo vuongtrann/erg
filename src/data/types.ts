@@ -13,6 +13,8 @@ export interface Course {
   image: string;
   duration: string;
   students: number;
+  format?: string;
+  curriculum?: string[];
 }
 
 export interface Teacher {

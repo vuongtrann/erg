@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, BookOpen, Phone, Facebook, Youtube } from 'lucide-react';
+import Image from 'next/image';
 import { NAV_ITEMS } from '@/data/constants';
 
 const Header: React.FC = () => {
@@ -21,9 +22,9 @@ const Header: React.FC = () => {
   }, []);
 
   // Close mobile menu when route changes
-//   useEffect(() => {
-//     setIsMobileMenuOpen(false);
-//   }, [pathname]);
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
   return (
     <header
@@ -50,7 +51,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <div className="bg-white text-white p-2 rounded-lg group-hover:bg-gray-50 transition-colors">
-              <img src="/erg.webp" alt="Logo" className="w-20 h-9" />
+              <Image src="/erg.webp" alt="Logo" width={80} height={36} />
             </div>
             <div>
               <h1 className="text-2xl font-bold text-blue-900 leading-none">ERG</h1>
