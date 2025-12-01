@@ -1,9 +1,10 @@
-import { Course, NavItem, NewsItem, Teacher, Testimonial } from '@/data/types';
+import { Course, NavItem, NewsItem, Teacher, Testimonial, RoadmapSection } from '@/data/types';
 
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Trang chủ', path: '/' },
   { label: 'Giới thiệu', path: '/gioi-thieu' },
   { label: 'Khóa học', path: '/khoa-hoc' },
+  { label: 'Lộ trình', path: '/lo-trinh' },
   { label: 'Đội ngũ giáo viên', path: '/giao-vien' },
   { label: 'Tin tức', path: '/tin-tuc' },
   { label: 'Liên hệ', path: '/lien-he' },
@@ -11,12 +12,12 @@ export const NAV_ITEMS: NavItem[] = [
 
 export const HERO_SLIDES = [
   {
-    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+    image: '/unnamed.webp',
     title: 'Khơi dậy tiềm năng - Vươn tới thành công',
     subtitle: 'Môi trường giáo dục hiện đại, sáng tạo giúp học sinh phát triển toàn diện.',
   },
   {
-    image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+    image: '/unnamed.webp',
     title: 'Đội ngũ giáo viên tâm huyết',
     subtitle: 'Chúng tôi đồng hành cùng sự phát triển của con em bạn.',
   },
@@ -109,22 +110,22 @@ export const TEACHERS: Teacher[] = [
   },
 ];
 
-export const TESTIMONIALS: Testimonial[] = [
-  {
-    id: 'ts1',
-    name: 'Phạm Minh H',
-    role: 'Học sinh lớp 12',
-    content: 'Nhờ thầy cô tại ERG, em đã tự tin hơn rất nhiều và đỗ vào trường đại học mơ ước.',
-    avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-  },
-  {
-    id: 'ts2',
-    name: 'Chị Nguyễn Thu Thảo',
-    role: 'Phụ huynh',
-    content: 'Môi trường học tập rất tốt, cơ sở vật chất hiện đại. Tôi rất yên tâm khi gửi con theo học tại đây.',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-  },
-];
+// export const TESTIMONIALS: Testimonial[] = [
+//   {
+//     id: 'ts1',
+//     name: 'Phạm Minh H',
+//     role: 'Học sinh lớp 12',
+//     content: 'Nhờ thầy cô tại ERG, em đã tự tin hơn rất nhiều và đỗ vào trường đại học mơ ước.',
+//     avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+//   },
+//   {
+//     id: 'ts2',
+//     name: 'Chị Nguyễn Thu Thảo',
+//     role: 'Phụ huynh',
+//     content: 'Môi trường học tập rất tốt, cơ sở vật chất hiện đại. Tôi rất yên tâm khi gửi con theo học tại đây.',
+//     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+//   },
+// ];
 
 export const NEWS: NewsItem[] = [
   {
@@ -148,4 +149,90 @@ export const NEWS: NewsItem[] = [
     summary: 'Chia sẻ kinh nghiệm, giải đáp thắc mắc cho phụ huynh và học sinh.',
     image: 'https://images.unsplash.com/photo-1544531696-32269279a071?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
   },
+];
+export const ROADMAP_DATA: RoadmapSection[] = [
+  {
+    id: 1,
+    title: '1. CHƯƠNG TRÌNH CHO NGƯỜI MỚI BẮT ĐẦU',
+    items: [
+      'Máy tính cơ bản cho người mới bắt đầu',
+      'Soạn thảo văn bản Word cơ bản',
+      'Bảng tính Excel cơ bản'
+    ]
+  },
+  {
+    id: 2,
+    title: '2. TIN HỌC VĂN PHÒNG CƠ BẢN',
+    items: [
+      'Máy tính cơ bản',
+      'Soạn thảo văn bản hành chính',
+      'Excel cơ bản',
+      'Thuyết trình với PowerPoint'
+    ]
+  },
+  {
+    id: 3,
+    title: '3. TIN HỌC VĂN PHÒNG NÂNG CAO',
+    items: [
+      'Máy tính nâng cao',
+      'Word nâng cao',
+      'Excel nâng cao'
+    ]
+  },
+  {
+    id: 4,
+    title: '4. TIN HỌC VĂN PHÒNG CHUYÊN SÂU',
+    items: [
+      'Excel chuyên sâu',
+      'Lập trình VBA Excel',
+      'Tổng hợp & phân tích dữ liệu với Pivot Table',
+      'Power Query'
+    ]
+  },
+  {
+    id: 5,
+    title: '5. TIN HỌC TRẺ EM – HỌC SINH',
+    items: [
+      'Lập trình Scratch',
+      'Ứng dụng tin học cơ bản',
+      'Ứng dụng tin học nâng cao',
+      'Lập trình Python cho trẻ em'
+    ]
+  },
+  {
+    id: 6,
+    title: '6. TIN HỌC QUỐC TẾ',
+    items: [
+      'Chương trình được xây dựng theo chuẩn IC3-Spark, IC3 và MOS, giúp học sinh đủ năng lực thi chứng chỉ quốc tế.'
+    ]
+  }
+];
+export const TESTIMONIALS: Testimonial[] = [
+  {
+    id: 'ts1',
+    name: 'Phạm Minh H',
+    role: 'Học sinh lớp 12',
+    content: 'Nhờ thầy cô tại ERG, em đã tự tin hơn rất nhiều và đỗ vào trường đại học mơ ước. Môi trường học tập rất thân thiện và chuyên nghiệp.',
+    avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+  },
+  {
+    id: 'ts2',
+    name: 'Chị Nguyễn Thu Thảo',
+    role: 'Phụ huynh học sinh',
+    content: 'Tôi rất yên tâm khi gửi con theo học tại ERG. Các con không chỉ được học kiến thức mà còn được rèn luyện kỹ năng mềm rất tốt.',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+  },
+  {
+    id: 'ts3',
+    name: 'Lê Văn Nam',
+    role: 'Sinh viên ĐH Bách Khoa',
+    content: 'Khóa học Excel chuyên sâu đã giúp mình xử lý dữ liệu nhanh chóng, phục vụ rất tốt cho đồ án tốt nghiệp và công việc sau này.',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+  },
+];
+export const TRAINING_GOALS = [
+  'Thành thạo kỹ năng máy tính và tin học văn phòng',
+  'Tăng năng suất làm việc và khả năng ứng dụng thực tế',
+  'Chuẩn bị kiến thức vững chắc để thi chứng chỉ quốc tế',
+  'Phát triển tư duy và kỹ năng công nghệ cho học sinh'
 ];
