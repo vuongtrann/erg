@@ -11,6 +11,11 @@ const inter = Inter({ subsets: ["latin", "vietnamese"] });
 export const metadata: Metadata = {
   title: "Hệ thống Giáo dục ERG",
   description: "Trang web hệ thống giáo dục ERG với đầy đủ các trang giới thiệu, khóa học và liên hệ.",
+  icons: {
+    icon: [
+      { url: '/icon.png'}
+    ],
+  },
 };
 
 export default function RootLayout({
