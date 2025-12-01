@@ -44,8 +44,16 @@ body {
   .animate-pulse-slow {
     animation: pulse-slow 2s infinite;
   }
+  .animate-scroll {
+    animation: scroll 40s linear infinite;
+  }
+  
+  /* Pause animation on hover for better UX */
+  .animate-scroll:hover {
+    animation-play-state: paused;
+  }
 }
-
+ 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -59,4 +67,9 @@ body {
 @keyframes pulse-slow {
   0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
   70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+}
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
