@@ -229,6 +229,13 @@ export const TESTIMONIALS: Testimonial[] = [
     content: 'Khóa học Excel chuyên sâu đã giúp mình xử lý dữ liệu nhanh chóng, phục vụ rất tốt cho đồ án tốt nghiệp và công việc sau này.',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
   },
+  {
+    id: 'ts4',
+    name: 'Lê Văn Linh',
+    role: 'Sinh viên ĐH Kinh Tế',
+    content: 'Khóa học Excel chuyên sâu đã giúp mình xử lý dữ liệu nhanh chóng, phục vụ rất tốt cho đồ án tốt nghiệp và công việc sau này.',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
+  },
 ];
 export const TRAINING_GOALS = [
   'Thành thạo kỹ năng máy tính và tin học văn phòng',

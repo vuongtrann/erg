@@ -49,8 +49,8 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="bg-blue-600 text-white p-2 rounded-lg group-hover:bg-blue-700 transition-colors">
-              <BookOpen size={24} />
+            <div className="bg-white text-white p-2 rounded-lg group-hover:bg-gray-50 transition-colors">
+              <img src="/erg.webp" alt="Logo" className="w-20 h-9" />
             </div>
             <div>
               <h1 className="text-2xl font-bold text-blue-900 leading-none">ERG</h1>

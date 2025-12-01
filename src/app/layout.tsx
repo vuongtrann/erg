@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import FloatingContact from "@/components/FloatingContact";
 
 const inter = Inter({ subsets: ["latin", "vietnamese"] });
 
@@ -19,11 +20,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi">
-      <body className={`${inter.className} bg-gray-50 text-slate-800 antialiased flex flex-col min-h-screen`}>
+      <body 
+        className={`${inter.className} bg-gray-50 text-slate-800 antialiased flex flex-col min-h-screen`}
+        suppressHydrationWarning={true}
+      >
         <Header />
         <main className="flex-grow pt-[72px] lg:pt-[88px]">
           {children}
         </main>
+        <FloatingContact />
         <Footer />
       </body>
     </html>

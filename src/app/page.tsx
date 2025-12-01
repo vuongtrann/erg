@@ -16,6 +16,10 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
+  // Duplicate testimonials to create a seamless infinite loop
+  // We repeat it 4 times to ensure it covers wide screens before looping
+  const scrollTestimonials = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
+
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
@@ -220,14 +224,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials Section (Enhanced) */}
-      <section className="py-16 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      {/* Testimonials Section (Auto-Scroll / Marquee) */}
+      <section className="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute top-0 left-0 w-64 h-64 bg-orange-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 translate-x-1/3 translate-y-1/3"></div>
 
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="text-center mb-16">
+        <div className="container mx-auto px-4 md:px-6 relative z-10 mb-12">
+          <div className="text-center">
              <div className="inline-block bg-orange-100 text-orange-600 px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide mb-4">
                Học viên nói gì về chúng tôi
              </div>
@@ -238,25 +242,38 @@ export default function Home() {
                Sự hài lòng của phụ huynh và học sinh là minh chứng rõ nhất cho chất lượng đào tạo tại ERG.
              </p>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {TESTIMONIALS.map((item) => (
-              <div key={item.id} className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 relative hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                <Quote className="text-blue-100 absolute top-6 right-6" size={56} />
-                <div className="mb-6">
-                  <div className="flex text-yellow-400 mb-2">
-                    {[...Array(5)].map((_, i) => <Star key={i} size={18} fill="currentColor" />)}
+        </div>
+
+        {/* Marquee Container */}
+        <div className="relative w-full overflow-hidden">
+          {/* Fading Edges for better visual effect */}
+          <div className="absolute left-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-r from-gray-50 to-transparent z-20"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-l from-white to-transparent z-20"></div>
+
+          <div className="flex w-max animate-scroll">
+            {scrollTestimonials.map((item, index) => (
+              <div 
+                key={`${item.id}-${index}`} 
+                className="w-[85vw] md:w-[450px] flex-shrink-0 px-4"
+              >
+                <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 h-full flex flex-col hover:-translate-y-1 transition-transform duration-300">
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="flex text-yellow-400">
+                      {[...Array(5)].map((_, i) => <Star key={i} size={18} fill="currentColor" />)}
+                    </div>
+                    <Quote className="text-blue-100" size={40} />
                   </div>
-                  <p className="text-gray-700 italic leading-relaxed text-lg flex-grow">
+                  
+                  <p className="text-gray-700 italic leading-relaxed text-lg flex-grow mb-6">
                     {item.content}
                   </p>
-                </div>
-                
-                <div className="flex items-center gap-4 mt-auto pt-6 border-t border-gray-100">
-                  <img src={item.avatar} alt={item.name} className="w-12 h-12 rounded-full object-cover ring-2 ring-blue-50" />
-                  <div>
-                    <h4 className="font-bold text-gray-900">{item.name}</h4>
-                    <p className="text-sm text-blue-600 font-medium">{item.role}</p>
+                  
+                  <div className="flex items-center gap-4 pt-6 border-t border-gray-100">
+                    <img src={item.avatar} alt={item.name} className="w-14 h-14 rounded-full object-cover ring-4 ring-blue-50" />
+                    <div>
+                      <h4 className="font-bold text-gray-900 text-lg">{item.name}</h4>
+                      <p className="text-sm text-blue-600 font-medium">{item.role}</p>
+                    </div>
                   </div>
                 </div>
               </div>

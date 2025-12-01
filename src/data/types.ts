@@ -1,3 +1,4 @@
+
 export interface NavItem {
   label: string;
   path: string;
@@ -37,15 +38,9 @@ export interface NewsItem {
   summary: string;
   image: string;
 }
+
 export interface RoadmapSection {
   id: number;
   title: string;
   items: string[];
-}
-export interface Testimonial {
-  id: string;
-  name: string;
-  role: string;
-  content: string;
-  avatar: string;
 }
