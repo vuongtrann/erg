@@ -3,8 +3,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Star, Users, Award, BookOpen, CheckCircle } from 'lucide-react';
-import { HERO_SLIDES, COURSES, NEWS } from '@/data/constants';
+import { ArrowRight, Star, Users, Award, BookOpen, CheckCircle, Quote, Map, Layers } from 'lucide-react';
+import { HERO_SLIDES, COURSES, NEWS, TESTIMONIALS, ROADMAP_DATA } from '@/data/constants';
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -15,6 +15,10 @@ export default function Home() {
     }, 5000);
     return () => clearInterval(timer);
   }, []);
+
+  // Duplicate testimonials to create a seamless infinite loop
+  // We repeat it 4 times to ensure it covers wide screens before looping
+  const scrollTestimonials = [...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS];
 
   return (
     <div className="animate-fade-in">
@@ -43,10 +47,10 @@ export default function Home() {
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
                   <Link
-                    href="/khoa-hoc"
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition-all hover:scale-105"
+                    href="/lo-trinh"
+                    className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-full font-semibold transition-all hover:scale-105 shadow-lg"
                   >
-                    Khám phá khóa học
+                    Xem lộ trình chi tiết
                   </Link>
                   <Link
                     href="/lien-he"
@@ -122,8 +126,60 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Roadmap Preview Section (New) */}
+      <section className="py-16 bg-blue-50">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12">
+            <div>
+              <h4 className="text-blue-600 font-bold uppercase tracking-wide mb-2">Lộ trình đào tạo</h4>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+                Chương trình học bài bản tại ERG
+              </h2>
+              <p className="text-gray-600 mt-2 max-w-2xl">
+                Chúng tôi xây dựng lộ trình chi tiết từ cơ bản đến chuyên sâu, phù hợp với mọi đối tượng.
+              </p>
+            </div>
+            <Link
+              href="/lo-trinh"
+              className="hidden md:flex items-center gap-2 text-white bg-blue-600 px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
+            >
+              Xem đầy đủ lộ trình <ArrowRight size={18} />
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {ROADMAP_DATA.slice(0, 6).map((item) => (
+              <div key={item.id} className="bg-white p-6 rounded-xl border border-blue-100 shadow-sm hover:shadow-md transition-all">
+                <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4 text-blue-600">
+                  <Layers size={24} />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 mb-3">{item.title}</h3>
+                <ul className="space-y-2">
+                   {item.items.slice(0, 2).map((sub, i) => (
+                     <li key={i} className="text-gray-600 text-sm flex items-start gap-2">
+                       <span className="text-blue-500 mt-1">•</span> {sub}
+                     </li>
+                   ))}
+                   {item.items.length > 2 && (
+                     <li className="text-blue-500 text-sm font-medium pt-1">...và còn nữa</li>
+                   )}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 text-center md:hidden">
+            <Link
+              href="/lo-trinh"
+              className="inline-flex items-center gap-2 text-white bg-blue-600 px-6 py-3 rounded-full hover:bg-blue-700 transition-colors"
+            >
+              Xem đầy đủ lộ trình <ArrowRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Featured Courses */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Các khóa học nổi bật</h2>
@@ -133,7 +189,7 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {COURSES.slice(0, 3).map((course) => (
-              <div key={course.id} className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow overflow-hidden group">
+              <div key={course.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow overflow-hidden group">
                 <div className="relative h-48 overflow-hidden">
                   <img
                     src={course.image}
@@ -164,6 +220,64 @@ export default function Home() {
             >
               Xem tất cả khóa học
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section (Auto-Scroll / Marquee) */}
+      <section className="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-0 w-64 h-64 bg-orange-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 -translate-x-1/2 -translate-y-1/2"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-30 translate-x-1/3 translate-y-1/3"></div>
+
+        <div className="container mx-auto px-4 md:px-6 relative z-10 mb-12">
+          <div className="text-center">
+             <div className="inline-block bg-orange-100 text-orange-600 px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide mb-4">
+               Học viên nói gì về chúng tôi
+             </div>
+             <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
+               Hơn 2000+ học viên tin tưởng
+             </h2>
+             <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+               Sự hài lòng của phụ huynh và học sinh là minh chứng rõ nhất cho chất lượng đào tạo tại ERG.
+             </p>
+          </div>
+        </div>
+
+        {/* Marquee Container */}
+        <div className="relative w-full overflow-hidden">
+          {/* Fading Edges for better visual effect */}
+          <div className="absolute left-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-r from-gray-50 to-transparent z-20"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-8 md:w-32 bg-gradient-to-l from-white to-transparent z-20"></div>
+
+          <div className="flex w-max animate-scroll">
+            {scrollTestimonials.map((item, index) => (
+              <div 
+                key={`${item.id}-${index}`} 
+                className="w-[85vw] md:w-[450px] flex-shrink-0 px-4"
+              >
+                <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 h-full flex flex-col hover:-translate-y-1 transition-transform duration-300">
+                  <div className="flex justify-between items-start mb-6">
+                    <div className="flex text-yellow-400">
+                      {[...Array(5)].map((_, i) => <Star key={i} size={18} fill="currentColor" />)}
+                    </div>
+                    <Quote className="text-blue-100" size={40} />
+                  </div>
+                  
+                  <p className="text-gray-700 italic leading-relaxed text-lg flex-grow mb-6">
+                    {item.content}
+                  </p>
+                  
+                  <div className="flex items-center gap-4 pt-6 border-t border-gray-100">
+                    <img src={item.avatar} alt={item.name} className="w-14 h-14 rounded-full object-cover ring-4 ring-blue-50" />
+                    <div>
+                      <h4 className="font-bold text-gray-900 text-lg">{item.name}</h4>
+                      <p className="text-sm text-blue-600 font-medium">{item.role}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

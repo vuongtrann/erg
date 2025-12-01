@@ -60,17 +60,22 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="text-white font-bold text-lg mb-6">Thông tin liên hệ</h3>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <MapPin size={20} className="text-blue-500 shrink-0 mt-1" />
-                <span>Số 123, Đường Nguyễn Trãi, Quận Thanh Xuân, Hà Nội</span>
-              </li>
+              <div className="flex items-start gap-3">
+                    <div className="text-blue-500 shrink-0 mt-1">
+                        <MapPin size={24} />
+                    </div>
+                    <div>
+                        <p className="text-blue-100">Trụ sở chính: 83B, Hoàng Sa, Phường Tân Định, TP.Hồ Chí Minh</p>
+                        <p className="text-blue-100">Trung tâm Tin học ERG, Số 40-42 Bình Phú, P Bình Phú, TP. Hồ Chí Minh</p>
+                    </div>
+                </div>
               <li className="flex items-center gap-3">
                 <Phone size={20} className="text-blue-500 shrink-0" />
-                <span>0912.345.678</span>
+                <span>0766.144.888</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={20} className="text-blue-500 shrink-0" />
-                <span>contact@erg.edu.vn</span>
+                <span>info.eduerg@gmail.com</span>
               </li>
             </ul>
           </div>

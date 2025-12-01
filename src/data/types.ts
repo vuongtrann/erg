@@ -1,3 +1,4 @@
+
 export interface NavItem {
   label: string;
   path: string;
@@ -36,4 +37,10 @@ export interface NewsItem {
   date: string;
   summary: string;
   image: string;
+}
+
+export interface RoadmapSection {
+  id: number;
+  title: string;
+  items: string[];
 }
