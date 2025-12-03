@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   icons: {
     // Đây là icon hiển thị trên tab trình duyệt.
     icon: [
-      { url: 'https://cdn-icons-png.flaticon.com/512/2997/2997235.png' }
+      { url: '/icon.png',sizes: '16x32', type: 'image/png' },
     ],
   },
 };
