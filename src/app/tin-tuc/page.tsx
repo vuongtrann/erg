@@ -1,7 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Calendar, ChevronLeft, ChevronRight, Loader2, ChevronRight as ChevronRightIcon } from 'lucide-react';
+// Thêm icon Flame vào import
+import { Calendar, ChevronLeft, ChevronRight, Loader2, ChevronRight as ChevronRightIcon, Flame } from 'lucide-react';
 
 const DEFAULT_IMAGE = 'https://moet.gov.vn/upload/2007219/20251020/image_2025-10-20_11-46-19_998cd.png';
 const ITEMS_PER_PAGE = 9;
@@ -18,18 +19,30 @@ export default function NewsPage() {
   const [news, setNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  // Thêm state để hiển thị lỗi nếu có
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  // --- Các hàm tiện ích giữ nguyên ---
+  // --- Hàm kiểm tra tin mới (<= 2 ngày) ---
+  const isRecentNews = (dateString: string): boolean => {
+    try {
+      const pubDate = new Date(dateString);
+      const now = new Date();
+      // Tính khoảng cách thời gian theo mili-giây
+      const diffTime = now.getTime() - pubDate.getTime();
+      // Chuyển đổi sang ngày (1 ngày = 1000ms * 60s * 60m * 24h)
+      const diffDays = diffTime / (1000 * 3600 * 24);
+      return diffDays <= 2;
+    } catch (e) {
+      return false;
+    }
+  };
+
+  // --- Các hàm tiện ích ---
   const extractImage = (content: string | null): string => {
     if (!content) return DEFAULT_IMAGE;
-    // Regex tìm src ảnh, hỗ trợ cả dấu nháy đơn và kép
     const imgRegex = /<img[^>]+src=['"]([^'"]+)['"]/;
     const match = content.match(imgRegex);
     if (match && match[1]) {
       let src = match[1];
-      // Nếu ảnh là đường dẫn tương đối (bắt đầu bằng /)
       if (src.startsWith('/')) {
         src = `https://moet.gov.vn${src}`;
       }
@@ -57,7 +70,6 @@ export default function NewsPage() {
       setLoading(true);
       setErrorMsg(null);
       try {
-        // GỌI API ROUTE CỦA MÌNH (Không gọi trực tiếp sang MOET hay AllOrigins)
         const res = await fetch('/api/rss');
         
         if (!res.ok) {
@@ -65,12 +77,9 @@ export default function NewsPage() {
         }
 
         const xmlText = await res.text();
-
-        // Parse XML
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(xmlText, "text/xml");
         
-        // Kiểm tra xem có phải XML lỗi không
         if (xmlDoc.querySelector("parsererror")) {
              throw new Error("Lỗi phân tích cú pháp XML");
         }
@@ -80,19 +89,32 @@ export default function NewsPage() {
         const formattedNews: NewsItem[] = Array.from(items).map((item) => {
           const descriptionHtml = getTextContent(item, "description");
           const rawPubDate = getTextContent(item, "pubDate");
+
+          let linkUrl = "";
+          const linkNodes = item.getElementsByTagName("link");
+          
+          for (let i = 0; i < linkNodes.length; i++) {
+            const txt = linkNodes[i].textContent?.trim();
+            if (txt && txt.length > 0) {
+                linkUrl = txt;
+                break;
+            }
+          }
+
+          if (!linkUrl) {
+             linkUrl = getTextContent(item, "guid");
+          }
           
           return {
             title: getTextContent(item, "title"),
             pubDate: rawPubDate,
-            link: getTextContent(item, "link"),
+            link: linkUrl,
             thumbnail: extractImage(descriptionHtml),
             description: stripHtml(descriptionHtml)
           };
         });
 
-        // RSS thường đã sắp xếp sẵn, nhưng sort lại cho chắc chắn
         formattedNews.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
-
         setNews(formattedNews);
       } catch (error) {
         console.error('Error fetching news:', error);
@@ -105,7 +127,7 @@ export default function NewsPage() {
     fetchNews();
   }, []);
 
-  // --- Logic Phân trang & Render (Giữ nguyên như code cũ của bạn) ---
+  // --- Logic Phân trang ---
   const totalPages = Math.ceil(news.length / ITEMS_PER_PAGE);
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
@@ -132,7 +154,7 @@ export default function NewsPage() {
         <div className="container mx-auto px-4">
           <h1 className="text-4xl font-bold mb-4">Tin Tức Giáo Dục</h1>
           <p className="text-blue-100 max-w-2xl mx-auto">
-            Cập nhật những thông tin mới nhất từ Bộ Giáo dục và Đào tạo.
+            Cập nhật những thông tin mới nhất về giáo dục
           </p>
         </div>
       </div>
@@ -153,7 +175,7 @@ export default function NewsPage() {
               {currentNews.map((item, index) => (
                 <article 
                   key={index} 
-                  className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full border border-gray-100"
+                  className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full border border-gray-100 relative"
                 >
                   <a href={item.link} target="_blank" rel="noopener noreferrer" className="relative h-52 overflow-hidden block">
                     <img 
@@ -164,9 +186,18 @@ export default function NewsPage() {
                         (e.target as HTMLImageElement).src = DEFAULT_IMAGE;
                       }}
                     />
-                    <div className="absolute top-4 left-4 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">
-                      Bộ GD & ĐT
-                    </div>
+                    
+                    {/* --- HIỂN THỊ BADGE TIN MỚI NẾU <= 2 NGÀY --- */}
+                    {isRecentNews(item.pubDate) && (
+                      <div className="absolute top-3 left-3 z-10">
+                        <div className="flex items-center gap-1 bg-gradient-to-r from-red-600 via-orange-500 to-yellow-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-[0_0_10px_rgba(255,100,0,0.5)] border border-orange-300/50 backdrop-blur-sm">
+                            <Flame size={14} className="fill-yellow-200 text-yellow-100 animate-pulse" />
+                            <span className="drop-shadow-sm">TIN MỚI</span>
+                        </div>
+                      </div>
+                    )}
+                    {/* ------------------------------------------- */}
+
                   </a>
                   
                   <div className="p-6 flex flex-col flex-grow">
