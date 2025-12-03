@@ -1,4 +1,5 @@
 
+import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -12,8 +13,9 @@ export const metadata: Metadata = {
   title: "Hệ thống Giáo dục ERG",
   description: "Trang web hệ thống giáo dục ERG với đầy đủ các trang giới thiệu, khóa học và liên hệ.",
   icons: {
+    // Đây là icon hiển thị trên tab trình duyệt.
     icon: [
-      { url: '/icon.png'}
+      { url: 'https://cdn-icons-png.flaticon.com/512/2997/2997235.png' }
     ],
   },
 };
@@ -26,13 +28,17 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <body 
-        className={`${inter.className} bg-gray-50 text-slate-800 antialiased flex flex-col min-h-screen`}
+        className={`${inter.className} bg-gray-50 text-slate-800 antialiased flex flex-col min-h-screen overflow-x-hidden`} 
+        /* THÊM class: overflow-x-hidden vào thẻ body */
         suppressHydrationWarning={true}
       >
         <Header />
-        <main className="flex-grow pt-[72px] lg:pt-[88px]">
+        
+        {/* Thêm w-full và max-w-[100vw] để đảm bảo main không bao giờ bị tràn */}
+        <main className="flex-grow pt-[65px] lg:pt-[88px] w-full max-w-[100vw] overflow-hidden">
           {children}
         </main>
+        
         <FloatingContact />
         <Footer />
       </body>

@@ -10,6 +10,10 @@
   --font-sans: 'Inter', sans-serif;
 }
 
+/* * {
+  outline: 1px solid red !important;
+} */
+
 body {
   color: rgb(var(--foreground-rgb));
   background: white;
