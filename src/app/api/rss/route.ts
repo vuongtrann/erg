@@ -2,37 +2,50 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  // Link RSS chuẩn bạn vừa cung cấp
-  const RSS_URL = 'https://moet.gov.vn/rss/2007219/101914846.rss';
+  // Bỏ qua lỗi SSL (Self-signed certificate)
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
+  const RSS_URL = 'https://giaoducthoidai.vn/rss/giao-duc-17.rss';
 
   try {
     const response = await fetch(RSS_URL, {
       method: 'GET',
       headers: {
-        // QUAN TRỌNG: Giả lập User-Agent của Chrome để không bị chặn
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'application/rss+xml, application/xml, text/xml, */*'
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Referer': 'https://moet.gov.vn/',
       },
-      // Cache dữ liệu 5 phút để load nhanh hơn cho các lần sau
-      next: { revalidate: 300 } 
+      cache: 'no-store', 
     });
 
     if (!response.ok) {
-      return NextResponse.json({ error: `MOET Server returned ${response.status}` }, { status: response.status });
+      return NextResponse.json(
+        { error: `Lỗi từ server MOET: ${response.status} ${response.statusText}` }, 
+        { status: response.status }
+      );
     }
 
     const xmlData = await response.text();
 
-    // Trả về XML cho Client
     return new NextResponse(xmlData, {
       status: 200,
       headers: {
         'Content-Type': 'application/xml',
-        'Cache-Control': 's-maxage=300, stale-while-revalidate',
+        'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=59',
       },
     });
+
   } catch (error) {
-    console.error('RSS Fetch Error:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+    // --- SỬA LỖI TẠI ĐÂY ---
+    // Không dùng (error: any). Thay vào đó, để mặc định và kiểm tra kiểu:
+    console.error('RSS Fetch Error Chi tiết:', error);
+    
+    // Kiểm tra nếu error là một instance của Error để lấy message an toàn
+    const errorMessage = error instanceof Error ? error.message : 'Lỗi không xác định từ Server';
+
+    return NextResponse.json(
+      { error: errorMessage }, 
+      { status: 500 }
+    );
   }
 }
