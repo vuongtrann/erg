@@ -305,15 +305,16 @@ export default function Home() {
       
       {/* Testimonials Section */}
       <section className="py-20 bg-white relative overflow-hidden">
+        {/* Background Gradients */}
         <div className="absolute top-0 left-0 w-64 h-64 bg-blue-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 translate-x-1/3 translate-y-1/3"></div>
 
         <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-            <div className="max-w-2xl">
-               <div className="inline-block bg-blue-50 text-blue-600 px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide mb-4">
-                 Cảm nhận học viên
-               </div>
+          
+          {/* Header Section */}
+          <div className="flex flex-col items-center text-center mb-12">
+            <div className="max-w-3xl">
+               
                <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
                  Học viên nói gì về ERG?
                </h2>
@@ -321,63 +322,78 @@ export default function Home() {
                  Sự hài lòng của phụ huynh và học sinh là minh chứng rõ nhất cho chất lượng đào tạo của chúng tôi.
                </p>
             </div>
-            
-            <div className="flex gap-3 mt-6 md:mt-0">
-              <button 
-                onClick={() => scrollTestimonials('left')}
-                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-sm bg-white"
-                aria-label="Previous testimonial"
-              >
-                <ChevronLeft size={24} />
-              </button>
-              <button 
-                onClick={() => scrollTestimonials('right')}
-                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-sm bg-white"
-                aria-label="Next testimonial"
-              >
-                <ChevronRight size={24} />
-              </button>
-            </div>
           </div>
 
-          <div 
-            ref={testimonialRef}
-            className="flex overflow-x-auto gap-6 pb-8 -mx-4 px-4 snap-x no-scrollbar scroll-smooth items-stretch"
-          >
-            {[...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS].map((item, index) => (
-              <div 
-                key={`${item.id}-${index}`} 
-                className="min-w-[80vw] md:min-w-[45%] lg:min-w-[30%] xl:min-w-[23%] flex-shrink-0 snap-center"
-              >
-                <div className="bg-white p-8 rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 h-full flex flex-col relative transition-transform duration-300 hover:-translate-y-1">
-                  
-                  <div className="flex justify-between items-start mb-6">
-                    <div className="flex gap-1">
-                      {[...Array(5)].map((_, i) => (
-                          <Star key={i} size={18} className="text-yellow-400 fill-yellow-400" />
-                      ))}
+          {/* --- SLIDER CONTAINER --- */}
+          <div className="relative group">
+            
+            {/* Nút Previous (Trái) */}
+            <button 
+              onClick={() => scrollTestimonials('left')}
+              /* - hidden md:flex: Ẩn trên mobile, hiện trên PC/Tablet
+                 - -mt-4: Kéo nút lên một chút để bù cho phần padding dưới (pb-8) của danh sách thẻ 
+              */
+              className="hidden md:flex absolute top-1/2 -left-4 xl:-left-6 transform -translate-y-1/2 -mt-4 z-20 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-100 items-center justify-center text-gray-600 hover:text-blue-600 hover:scale-110 transition-all"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            {/* Danh sách các thẻ */}
+            {/* pb-8: Padding dưới để chứa shadow của thẻ */}
+            <div 
+              ref={testimonialRef}
+              className="flex overflow-x-auto gap-6 pb-8 px-2 snap-x no-scrollbar scroll-smooth items-stretch"
+            >
+              {[...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS].map((item, index) => (
+                <div 
+                  key={`${item.id}-${index}`} 
+                  className="w-[340px] flex-shrink-0 snap-center"
+                >
+                  <div className="bg-white p-6 rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 h-full flex flex-col relative transition-transform duration-300 hover:-translate-y-1">
+                    
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="flex gap-1">
+                        {[...Array(5)].map((_, i) => (
+                            <Star key={i} size={16} className="text-yellow-400 fill-yellow-400" />
+                        ))}
+                      </div>
+                      <Quote className="text-blue-100 rotate-180 transform scale-x-[-1]" size={40} fill="currentColor" />
                     </div>
-                    <Quote className="text-blue-100 rotate-180 transform scale-x-[-1]" size={56} fill="currentColor" />
-                  </div>
-                  
-                  <p className="text-gray-600 italic leading-relaxed text-lg mb-8 flex-grow">
-                    {item.content}
-                  </p>
-                  
-                  <div className="flex items-center gap-4 mt-auto">
-                    <img src={item.avatar} alt={item.name} className="w-14 h-14 rounded-full object-cover ring-2 ring-gray-50" />
-                    <div>
-                      <h4 className="font-bold text-gray-900 text-lg">{item.name}</h4>
-                      <p className="text-blue-600 font-medium text-sm">{item.role}</p>
+                    
+                    <p className="text-gray-600 italic leading-relaxed text-base mb-6 flex-grow line-clamp-4">
+                      {item.content}
+                    </p>
+                    
+                    <div className="flex items-center gap-3 mt-auto pt-4 border-t border-gray-50">
+                      <img 
+                          src={item.avatar} 
+                          alt={item.name} 
+                          className="w-12 h-12 rounded-full object-cover ring-2 ring-gray-50 flex-shrink-0" 
+                      />
+                      <div>
+                        <h4 className="font-bold text-gray-900 text-base">{item.name}</h4>
+                        <p className="text-blue-600 font-medium text-xs">{item.role}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Nút Next (Phải) */}
+            <button 
+              onClick={() => scrollTestimonials('right')}
+              /* Tương tự nút trái: Ẩn trên mobile và chỉnh lại vị trí cho giữa tâm thẻ */
+              className="hidden md:flex absolute top-1/2 -right-4 xl:-right-6 transform -translate-y-1/2 -mt-4 z-20 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-100 items-center justify-center text-gray-600 hover:text-blue-600 hover:scale-110 transition-all"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight size={24} />
+            </button>
+
           </div>
         </div>
       </section>
-
       {/* Intro Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4 md:px-6">
