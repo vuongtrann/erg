@@ -70,8 +70,8 @@ const Header: React.FC = () => {
                 />
               </div>
               <div className="flex flex-col">
-                <h1 className="text-xl md:text-2xl font-bold text-blue-900 leading-none">ERG</h1>
-                <p className="text-[10px] md:text-xs text-gray-500 font-medium tracking-wider">EDUCATION SYSTEM</p>
+                <h1 className="text-xl md:text-2xl font-bold text-blue-900 leading-none">Edurise Global</h1>
+                <p className="text-[10px] md:text-xs text-gray-500 font-medium tracking-wider">Learn today, Lead tomorrow</p>
               </div>
             </Link>
 
