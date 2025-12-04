@@ -1,16 +1,15 @@
-
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Star, Users, Award, BookOpen, CheckCircle, Quote, Layers, ChevronLeft, ChevronRight, Monitor, Globe, Handshake } from 'lucide-react';
-import { HERO_SLIDES, COURSES, NEWS, TESTIMONIALS, ROADMAP_DATA, WHY_CHOOSE_US } from '@/data/constants';
+import { ArrowRight, Star, Users, Award, BookOpen, CheckCircle, Quote, ChevronLeft, ChevronRight, Monitor, Globe, Handshake } from 'lucide-react';
+import { HERO_SLIDES, COURSES, NEWS, TESTIMONIALS, WHY_CHOOSE_US } from '@/data/constants';
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const testimonialRef = useRef<HTMLDivElement>(null);
 
+  // --- Auto Slide Hero ---
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % HERO_SLIDES.length);
@@ -18,29 +17,15 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
-  // Hàm xử lý cuộn ngang
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollContainerRef.current) {
-      const { current } = scrollContainerRef;
-      // Cuộn một khoảng bằng chiều rộng của thẻ card (khoảng 350px - 450px tùy màn hình)
-      const scrollAmount = direction === 'left' ? -400 : 400;
-      current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-    }
-  };
-
-  // Testimonials Auto-scroll
+  // --- Logic cuộn Testimonial ---
   useEffect(() => {
     const autoScrollTestimonials = () => {
       if (testimonialRef.current) {
         const { current } = testimonialRef;
-        // Tính toán chiều rộng thẻ + gap (trên mobile thẻ rộng hơn, desktop nhỏ hơn chút)
-        // Lấy thẻ con đầu tiên để đo kích thước thực tế
         const firstCard = current.firstElementChild as HTMLElement;
-        const scrollAmount = firstCard ? firstCard.offsetWidth + 24 : 400; // 24 is gap-6
-
+        const scrollAmount = firstCard ? firstCard.offsetWidth + 24 : 400; 
         const maxScrollLeft = current.scrollWidth - current.clientWidth;
         
-        // Nếu đã cuộn gần đến cuối thì quay về đầu
         if (current.scrollLeft >= maxScrollLeft - 10) {
           current.scrollTo({ left: 0, behavior: 'smooth' });
         } else {
@@ -49,11 +34,10 @@ export default function Home() {
       }
     };
 
-    const testimonialTimer = setInterval(autoScrollTestimonials, 4000); // 4 giây cuộn 1 lần
+    const testimonialTimer = setInterval(autoScrollTestimonials, 4000); 
     return () => clearInterval(testimonialTimer);
   }, []);
 
-  // Hàm xử lý cuộn thủ công cho Testimonials
   const scrollTestimonials = (direction: 'left' | 'right') => {
     if (testimonialRef.current) {
       const { current } = testimonialRef;
@@ -74,28 +58,24 @@ export default function Home() {
       content: "Chúng tôi bồi dưỡng tin học văn phòng từ cơ bản đến nâng cao, lấy chất lượng làm gốc, cam kết đầu ra thành thạo tin học văn phòng.",
       bgColor: "bg-[#29b6f6]",
       icon: Monitor,
-      delay: "delay-0"
     },
     {
       title: "Chứng chỉ quốc tế IC3 Spark, IC3, MOS",
       content: "ERG cam kết đầu ra chứng chỉ tin học quốc tế, không chỉ là tấm bằng mà là hành trang cho tương lai của bạn.",
       bgColor: "bg-[#8bc34a]",
       icon: Award,
-      delay: "delay-100"
     },
     {
       title: "Đào tạo theo chương trình chuẩn quốc tế",
       content: "Chúng tôi mang tới cho bạn trải nghiệm học chất lượng cao, kiến thức vững chắc mà quốc tế công nhận.",
       bgColor: "bg-[#5c6bc0]",
       icon: Globe,
-      delay: "delay-200"
     },
     {
       title: "Hợp tác đào tạo tại cơ sở của bạn",
       content: "ERG sẵn sàng hợp tác triển khai đào tạo Tin học ngay tại cơ sở của quý đơn vị.",
       bgColor: "bg-[#ef5350]",
       icon: Handshake,
-      delay: "delay-300"
     }
   ];
 
@@ -164,7 +144,6 @@ export default function Home() {
               key={index}
               className={`${item.bgColor} p-8 md:p-10 text-center text-white flex flex-col items-center justify-start h-full group relative transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:z-10 cursor-default border-b md:border-b-0 md:border-r border-white/10 last:border-0`}
             >
-              {/* Icon với hiệu ứng vòng tròn mờ */}
               <div className="mb-6 relative">
                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-300">
                     <item.icon size={32} className="text-white" />
@@ -181,13 +160,13 @@ export default function Home() {
                 {item.content}
               </p>
 
-              {/* Overlay gradient nhẹ khi hover */}
               <div className="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors duration-300 pointer-events-none"></div>
             </div>
           ))}
         </div>
       </section>
-      {/* NEW SECTION 2: Why Choose Us (Tại sao nên chọn ERG) - From Image 2 */}
+
+      {/* Why Choose Us */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6">
            <div className="text-center mb-16">
@@ -195,7 +174,6 @@ export default function Home() {
               <div className="w-24 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
            </div>
            
-           {/* Đã thay đổi md:grid-cols-2 thành md:grid-cols-3 ở đây */}
            <div className="grid md:grid-cols-3 gap-x-12 gap-y-16">
               {WHY_CHOOSE_US.map((item, index) => (
                 <div key={index} className="flex gap-6 items-start">
@@ -203,7 +181,6 @@ export default function Home() {
                       <div className="w-16 h-16 rounded-full bg-[#0ea5e9] flex items-center justify-center text-white shadow-lg relative z-10 group-hover:scale-110 transition-transform duration-300">
                          <item.icon size={32} strokeWidth={1.5} />
                       </div>
-                      {/* Decorative elements behind icon */}
                       <div className="absolute top-0 right-0 -mr-2 -mt-2 w-16 h-16 bg-blue-100 rounded-full -z-0"></div>
                    </div>
                    <div>
@@ -220,9 +197,7 @@ export default function Home() {
         </div>
       </section>
 
-      
-
-      {/* Featured Courses */}
+      {/* Featured Courses - ĐÃ CHỈNH SỬA THEO YÊU CẦU: VIỀN TRẮNG + KHÔNG CẮT ẢNH */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
@@ -234,17 +209,30 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {COURSES.slice(0, 4).map((course) => (
               <div key={course.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow overflow-hidden group flex flex-col sm:flex-row h-full">
-                {/* Image Side */}
-                <div className="relative w-full sm:w-2/5 h-48 sm:h-auto shrink-0 overflow-hidden">
-                  <img
-                    src={course.image}
-                    alt={course.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 left-3 bg-white/90 backdrop-blur px-2.5 py-0.5 rounded-full text-[10px] font-bold text-blue-600 uppercase tracking-wide">
+                
+                {/* --- CHỈNH SỬA TẠI ĐÂY --- */}
+                {/* 1. bg-white: Nền trắng.
+                    2. p-2: Padding 2 (8px) tạo viền trắng xung quanh ảnh. */}
+                <div className="relative w-full sm:w-2/5 shrink-0 bg-white p-2">
+                  
+                  {/* 1. aspect-[3/4]: Tỷ lệ khung dọc, giúp khung trên Mobile cao to, dễ nhìn.
+                      2. rounded-xl: Bo góc ảnh bên trong.
+                      3. border border-gray-100: Viền mờ nhẹ bao quanh ảnh (tuỳ chọn cho đẹp). */}
+                  <div className="aspect-[3/4] sm:aspect-[3/4] sm:h-full w-full relative rounded-xl overflow-hidden border border-gray-100">
+                    <img
+                      src={course.image}
+                      alt={course.title}
+                      /* object-contain: Giữ nguyên vẹn ảnh, không cắt đầu đuôi. */
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+
+                  {/* Badge */}
+                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold text-blue-600 uppercase tracking-wide shadow-sm border border-gray-100">
                     {course.category}
                   </div>
                 </div>
+
                 {/* Content Side */}
                 <div className="p-6 flex flex-col w-full sm:w-3/5">
                   <h3 className="text-xl md:text-2xl font-bold text-[#0ea5e9] mb-3 leading-tight group-hover:text-blue-700 transition-colors">
@@ -274,9 +262,9 @@ export default function Home() {
                   )}
 
                   <div className="mt-auto">
-                     <Link href="/khoa-hoc" className="inline-block text-blue-600 font-bold hover:underline">
+                      <Link href="/khoa-hoc" className="inline-block text-blue-600 font-bold hover:underline">
                         Xem chi tiết &gt;
-                     </Link>
+                      </Link>
                   </div>
                 </div>
               </div>
@@ -292,7 +280,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
 
       {/* Stats Section */}
       <section className="py-16 bg-blue-900 text-white">
@@ -316,18 +303,18 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Testimonials Section (Carousel with Controls) */}
+      {/* Testimonials Section */}
       <section className="py-20 bg-white relative overflow-hidden">
-        {/* Decorative elements */}
+        {/* Background Gradients */}
         <div className="absolute top-0 left-0 w-64 h-64 bg-blue-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 translate-x-1/3 translate-y-1/3"></div>
 
         <div className="container mx-auto px-4 md:px-6 relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-            <div className="max-w-2xl">
-               <div className="inline-block bg-blue-50 text-blue-600 px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wide mb-4">
-                 Cảm nhận học viên
-               </div>
+          
+          {/* Header Section */}
+          <div className="flex flex-col items-center text-center mb-12">
+            <div className="max-w-3xl">
+               
                <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-4">
                  Học viên nói gì về ERG?
                </h2>
@@ -335,71 +322,75 @@ export default function Home() {
                  Sự hài lòng của phụ huynh và học sinh là minh chứng rõ nhất cho chất lượng đào tạo của chúng tôi.
                </p>
             </div>
-            
-            {/* Navigation Buttons */}
-            <div className="flex gap-3 mt-6 md:mt-0">
-              <button 
-                onClick={() => scrollTestimonials('left')}
-                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-sm bg-white"
-                aria-label="Previous testimonial"
-              >
-                <ChevronLeft size={24} />
-              </button>
-              <button 
-                onClick={() => scrollTestimonials('right')}
-                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-sm bg-white"
-                aria-label="Next testimonial"
-              >
-                <ChevronRight size={24} />
-              </button>
-            </div>
           </div>
 
-          {/* Scrollable Container */}
-          <div 
-            ref={testimonialRef}
-            className="flex overflow-x-auto gap-6 pb-8 -mx-4 px-4 snap-x no-scrollbar scroll-smooth items-stretch"
-          >
-            {/* We duplicate data to allow smooth looping feel */}
-            {[...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS].map((item, index) => (
-              <div 
-                key={`${item.id}-${index}`} 
-                // THAY ĐỔI CHÍNH Ở ĐÂY: Thu nhỏ kích thước thẻ
-                // min-w-[85vw] -> min-w-[80vw] (mobile: hơi nhỏ hơn)
-                // md:min-w-[400px] -> md:min-w-[45%] (tablet: 2 thẻ/dòng)
-                // lg:min-w-[30%] (desktop: 3 thẻ/dòng)
-                // xl:min-w-[23%] (large desktop: 4 thẻ/dòng)
-                className="min-w-[80vw] md:min-w-[45%] lg:min-w-[30%] xl:min-w-[23%] flex-shrink-0 snap-center"
-              >
-                <div className="bg-white p-8 rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 h-full flex flex-col relative transition-transform duration-300 hover:-translate-y-1">
-                  
-                  {/* Header: Stars Left, Quote Right */}
-                  <div className="flex justify-between items-start mb-6">
-                    <div className="flex gap-1">
-                      {[...Array(5)].map((_, i) => (
-                         <Star key={i} size={18} className="text-yellow-400 fill-yellow-400" />
-                      ))}
+          {/* --- SLIDER CONTAINER --- */}
+          <div className="relative group">
+            
+            {/* Nút Previous (Trái) */}
+            <button 
+              onClick={() => scrollTestimonials('left')}
+              /* - hidden md:flex: Ẩn trên mobile, hiện trên PC/Tablet
+                 - -mt-4: Kéo nút lên một chút để bù cho phần padding dưới (pb-8) của danh sách thẻ 
+              */
+              className="hidden md:flex absolute top-1/2 -left-4 xl:-left-6 transform -translate-y-1/2 -mt-4 z-20 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-100 items-center justify-center text-gray-600 hover:text-blue-600 hover:scale-110 transition-all"
+              aria-label="Previous testimonial"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            {/* Danh sách các thẻ */}
+            {/* pb-8: Padding dưới để chứa shadow của thẻ */}
+            <div 
+              ref={testimonialRef}
+              className="flex overflow-x-auto gap-6 pb-8 px-2 snap-x no-scrollbar scroll-smooth items-stretch"
+            >
+              {[...TESTIMONIALS, ...TESTIMONIALS, ...TESTIMONIALS].map((item, index) => (
+                <div 
+                  key={`${item.id}-${index}`} 
+                  className="w-[340px] flex-shrink-0 snap-center"
+                >
+                  <div className="bg-white p-6 rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] border border-gray-100 h-full flex flex-col relative transition-transform duration-300 hover:-translate-y-1">
+                    
+                    <div className="flex justify-between items-start mb-4">
+                      <div className="flex gap-1">
+                        {[...Array(5)].map((_, i) => (
+                            <Star key={i} size={16} className="text-yellow-400 fill-yellow-400" />
+                        ))}
+                      </div>
+                      <Quote className="text-blue-100 rotate-180 transform scale-x-[-1]" size={40} fill="currentColor" />
                     </div>
-                    {/* Quote Icon - Light Blue */}
-                    <Quote className="text-blue-100 rotate-180 transform scale-x-[-1]" size={56} fill="currentColor" />
-                  </div>
-                  
-                  {/* Content */}
-                  <p className="text-gray-600 italic leading-relaxed text-lg mb-8 flex-grow">
-                    {item.content}
-                  </p>
-                  
-                  {/* Footer: Avatar & Info */}
-                  <div className="flex items-center gap-4 mt-auto">
-                    <img src={item.avatar} alt={item.name} className="w-14 h-14 rounded-full object-cover ring-2 ring-gray-50" />
-                    <div>
-                      <h4 className="font-bold text-gray-900 text-lg">{item.name}</h4>
-                      <p className="text-blue-600 font-medium text-sm">{item.role}</p>
+                    
+                    <p className="text-gray-600 italic leading-relaxed text-base mb-6 flex-grow line-clamp-4">
+                      {item.content}
+                    </p>
+                    
+                    <div className="flex items-center gap-3 mt-auto pt-4 border-t border-gray-50">
+                      <img 
+                          src={item.avatar} 
+                          alt={item.name} 
+                          className="w-12 h-12 rounded-full object-cover ring-2 ring-gray-50 flex-shrink-0" 
+                      />
+                      <div>
+                        <h4 className="font-bold text-gray-900 text-base">{item.name}</h4>
+                        <p className="text-blue-600 font-medium text-xs">{item.role}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
+
+            {/* Nút Next (Phải) */}
+            <button 
+              onClick={() => scrollTestimonials('right')}
+              /* Tương tự nút trái: Ẩn trên mobile và chỉnh lại vị trí cho giữa tâm thẻ */
+              className="hidden md:flex absolute top-1/2 -right-4 xl:-right-6 transform -translate-y-1/2 -mt-4 z-20 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-100 items-center justify-center text-gray-600 hover:text-blue-600 hover:scale-110 transition-all"
+              aria-label="Next testimonial"
+            >
+              <ChevronRight size={24} />
+            </button>
+
           </div>
         </div>
       </section>
@@ -451,39 +442,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      
-
-      {/* News Section */}
-       {/* <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="flex justify-between items-end mb-12">
-             <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Tin tức mới nhất</h2>
-                <p className="text-gray-600">Cập nhật hoạt động và sự kiện tại ERG</p>
-             </div>
-             <Link href="/tin-tuc" className="hidden md:flex items-center text-blue-600 hover:text-blue-800">
-               Xem thêm <ArrowRight size={16} className="ml-1" />
-             </Link>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {NEWS.map((item) => (
-              <article key={item.id} className="group cursor-pointer">
-                <div className="rounded-xl overflow-hidden mb-4 h-48">
-                  <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <span className="text-sm text-blue-600 font-medium block mb-2">{item.date}</span>
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
-                  {item.title}
-                </h3>
-                <p className="text-gray-500 text-sm line-clamp-3 leading-relaxed">
-                  {item.summary}
-                </p>
-              </article>
-            ))}
-          </div>
-        </div>
-       </section> */}
     </div>
   );
 }

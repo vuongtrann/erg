@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState } from 'react';
@@ -12,7 +11,7 @@ export default function CoursesPage() {
   
   const categories = ['All', ...Array.from(new Set(COURSES.map(c => c.category)))];
 
-  // Logic lọc dữ liệu theo cả Category và Search Term
+  // Logic lọc dữ liệu
   const filteredCourses = COURSES.filter(course => {
     const matchesCategory = filter === 'All' || course.category === filter;
     const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
@@ -64,14 +63,24 @@ export default function CoursesPage() {
             {filteredCourses.map((course) => (
               <div key={course.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow overflow-hidden group flex flex-col sm:flex-row h-full">
                 
-                {/* Image Side - Responsive: Full width on mobile, 40% on desktop */}
-                <div className="relative w-full sm:w-2/5 h-56 sm:h-auto shrink-0 overflow-hidden">
-                  <img
-                    src={course.image}
-                    alt={course.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 left-3 bg-white/90 backdrop-blur px-2.5 py-0.5 rounded-full text-[10px] font-bold text-blue-600 uppercase tracking-wide shadow-sm">
+                {/* --- PHẦN ẢNH ĐÃ CHỈNH SỬA (Giống trang chủ) --- */}
+                {/* 1. bg-white: Nền trắng
+                    2. p-2: Padding tạo viền trắng */}
+                <div className="relative w-full sm:w-2/5 shrink-0 bg-white p-2">
+                  
+                  {/* 1. aspect-[3/4]: Tỷ lệ khung hình dọc chuẩn poster.
+                      2. rounded-xl: Bo góc ảnh bên trong. */}
+                  <div className="aspect-[3/4] sm:aspect-[3/4] sm:h-full w-full relative rounded-xl overflow-hidden border border-gray-100">
+                    <img
+                      src={course.image}
+                      alt={course.title}
+                      /* object-contain: Giữ nguyên vẹn ảnh, không cắt */
+                      className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+
+                  {/* Badge */}
+                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold text-blue-600 uppercase tracking-wide shadow-sm border border-gray-100">
                     {course.category}
                   </div>
                 </div>
@@ -107,13 +116,13 @@ export default function CoursesPage() {
 
                   {/* Footer Actions */}
                   <div className="mt-auto pt-4 border-t border-gray-50 flex items-center justify-between">
-                     <Link href="#" className="inline-block text-blue-600 font-bold hover:underline text-sm md:text-base">
+                      <Link href="#" className="inline-block text-blue-600 font-bold hover:underline text-sm md:text-base">
                         Xem chi tiết &gt;
-                     </Link>
-                     <div className="flex items-center gap-3 text-gray-400 text-xs">
-                        <span className="flex items-center gap-1"><BookOpen size={14}/> {course.students}</span>
-                     </div>
-                  </div>
+                      </Link>
+                      <div className="flex items-center gap-3 text-gray-400 text-xs">
+                         <span className="flex items-center gap-1"><BookOpen size={14}/> {course.students}</span>
+                      </div>
+                   </div>
                 </div>
               </div>
             ))}
