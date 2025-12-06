@@ -10,7 +10,7 @@ import FloatingContact from "@/components/FloatingContact";
 const inter = Inter({ subsets: ["latin", "vietnamese"] });
 
 export const metadata: Metadata = {
-  title: "Hệ thống Giáo dục ERG",
+  title: "Trung tâm tin học Giáo dục phát triển toàn cầu",
   description: "Trang web hệ thống giáo dục ERG với đầy đủ các trang giới thiệu, khóa học và liên hệ.",
   icons: {
     // Đây là icon hiển thị trên tab trình duyệt.
