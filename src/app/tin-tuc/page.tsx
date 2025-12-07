@@ -39,12 +39,17 @@ export default function NewsPage() {
   // --- Các hàm tiện ích ---
   const extractImage = (content: string | null): string => {
     if (!content) return DEFAULT_IMAGE;
-    const imgRegex = /<img[^>]+src=['"]([^'"]+)['"]/;
+    
+    // Cập nhật Regex để bắt src dù nó nằm sau các thuộc tính khác (fetchpriority, class...)
+    // Tìm thẻ <img ... src="..." ... >
+    const imgRegex = /<img[^>]+src=['"]([^'"]+)['"]/i;
     const match = content.match(imgRegex);
+    
     if (match && match[1]) {
       let src = match[1];
+      // Xử lý nếu ảnh là đường dẫn tương đối
       if (src.startsWith('/')) {
-        src = `https://moet.gov.vn${src}`;
+        src = `https://giaoduc.edu.vn${src}`; // Cập nhật domain gốc theo feed của bạn
       }
       return src;
     }
@@ -58,11 +63,10 @@ export default function NewsPage() {
     return temp.textContent || temp.innerText || '';
   };
 
-  const getTextContent = (element: Element | null, tagName: string): string => {
-    if (!element) return '';
-    const node = element.querySelector(tagName);
-    return node?.textContent || '';
-  };
+  // Hàm helper an toàn để lấy nội dung text từ node
+  const getNodeText = (node: Element | null): string => {
+     return node?.textContent || '';
+  }
 
   // --- useEffect Fetch Data ---
   useEffect(() => {
@@ -81,36 +85,46 @@ export default function NewsPage() {
         const xmlDoc = parser.parseFromString(xmlText, "text/xml");
         
         if (xmlDoc.querySelector("parsererror")) {
-             throw new Error("Lỗi phân tích cú pháp XML");
+              throw new Error("Lỗi phân tích cú pháp XML");
         }
 
         const items = xmlDoc.querySelectorAll("item");
         
         const formattedNews: NewsItem[] = Array.from(items).map((item) => {
-          const descriptionHtml = getTextContent(item, "description");
-          const rawPubDate = getTextContent(item, "pubDate");
+          // Lấy description để làm văn bản mô tả
+          const descriptionHtml = item.querySelector("description")?.textContent || "";
+          
+          // Lấy content:encoded để tìm ảnh (vì ảnh nằm trong CDATA của content:encoded)
+          // Cần thử nhiều cách gọi vì namespace XML có thể khác nhau giữa các trình duyệt
+          const contentEncoded = 
+            item.getElementsByTagName("content:encoded")[0]?.textContent ||
+            item.getElementsByTagName("encoded")[0]?.textContent ||
+            item.querySelector("encoded")?.textContent || 
+            "";
+
+          const rawPubDate = item.querySelector("pubDate")?.textContent || "";
+          const title = item.querySelector("title")?.textContent || "";
 
           let linkUrl = "";
           const linkNodes = item.getElementsByTagName("link");
-          
-          for (let i = 0; i < linkNodes.length; i++) {
-            const txt = linkNodes[i].textContent?.trim();
-            if (txt && txt.length > 0) {
-                linkUrl = txt;
-                break;
-            }
+          if (linkNodes.length > 0) {
+              linkUrl = linkNodes[0].textContent?.trim() || "";
           }
-
           if (!linkUrl) {
-             linkUrl = getTextContent(item, "guid");
+             linkUrl = item.querySelector("guid")?.textContent || "";
           }
           
+          // Ưu tiên lấy ảnh từ content:encoded trước, nếu không có thì lấy từ description
+          const thumbnailSrc = extractImage(contentEncoded) !== DEFAULT_IMAGE 
+            ? extractImage(contentEncoded) 
+            : extractImage(descriptionHtml);
+
           return {
-            title: getTextContent(item, "title"),
+            title: title,
             pubDate: rawPubDate,
             link: linkUrl,
-            thumbnail: extractImage(descriptionHtml),
-            description: stripHtml(descriptionHtml)
+            thumbnail: thumbnailSrc,
+            description: stripHtml(descriptionHtml) // Giữ description làm mô tả ngắn
           };
         });
 
