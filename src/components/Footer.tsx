@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
               <div className="bg-white text-white p-1.5 rounded-lg">
                   <Image src="/erg.webp" alt="Logo" width={80} height={36} />
               </div>
-              <span className="text-xl font-bold text-white">ERG Education</span>
+              <span className="text-xl font-bold text-white">Edurise Global</span>
             </div>
             <p className="text-slate-400 mb-6 leading-relaxed">
               Hệ thống giáo dục hàng đầu, cam kết mang lại chất lượng đào tạo tốt nhất cho thế hệ trẻ Việt Nam. Khơi dậy tiềm năng, kiến tạo tương lai.
@@ -80,7 +80,7 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="border-t border-slate-800 pt-8 text-center text-slate-500 text-sm">
-          <p>© 2024 ERG Education System. All rights reserved.</p>
+          <p>© 2025 Edurise Global. All rights reserved.</p>
         </div>
       </div>
     </footer>
