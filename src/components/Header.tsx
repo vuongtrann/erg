@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -91,9 +90,17 @@ const Header: React.FC = () => {
                   </Link>
                 );
               })}
-              <button className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-full font-medium transition-colors shadow-lg shadow-orange-500/30">
-                Đăng ký ngay
-              </button>
+              
+              {/* --- UPDATE: Desktop Button đổi thành thẻ a --- */}
+              <a 
+                href="https://zalo.me/0766144888"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-full font-medium transition-colors shadow-lg shadow-orange-500/30"
+              >
+                Đăng ký tư vấn
+              </a>
+
             </nav>
 
             
@@ -129,9 +136,18 @@ const Header: React.FC = () => {
                 </Link>
               );
             })}
-            <button className="mt-4 bg-orange-500 text-white py-3 rounded-lg font-bold shadow-md active:scale-95 transition-transform">
+            
+            {/* --- UPDATE: Mobile Button đổi thành thẻ a --- */}
+            <a 
+              href="https://zalo.me/0766144888"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 bg-orange-500 text-white py-3 rounded-lg font-bold shadow-md active:scale-95 transition-transform text-center"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               Đăng ký tư vấn
-            </button>
+            </a>
+
             <div className="mt-8 pt-6 border-t border-gray-100">
               <p className="text-sm text-gray-500 mb-2">Liên hệ với chúng tôi</p>
               <div className="flex gap-4">

@@ -6,6 +6,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
+import AdsPopup from "@/components/AdsPopup";
 
 const inter = Inter({ subsets: ["latin", "vietnamese"] });
 
@@ -33,6 +34,7 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <Header />
+        <AdsPopup />
         
         {/* Thêm w-full và max-w-[100vw] để đảm bảo main không bao giờ bị tràn */}
         <main className="flex-grow pt-[65px] lg:pt-[88px] w-full max-w-[100vw] overflow-hidden">
