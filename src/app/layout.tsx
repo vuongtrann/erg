@@ -12,12 +12,17 @@ const inter = Inter({ subsets: ["latin", "vietnamese"] });
 
 export const metadata: Metadata = {
   title: "Trung tâm tin học Giáo dục phát triển toàn cầu ",
-  description: "Trang web hệ thống giáo dục ERG với đầy đủ các trang giới thiệu, khóa học và liên hệ.",
+  description: "Trang web chính thức của Trung tâm tin học Giáo dục phát triển toàn cầu (ERG), cung cấp các khóa học, tài nguyên và dịch vụ liên quan đến công nghệ thông tin và giáo dục.",
   icons: {
     // Đây là icon hiển thị trên tab trình duyệt.
     icon: [
       { url: '/icon.png',sizes: '16x32', type: 'image/png' },
     ],
+  },
+  openGraph: {
+    title: "Trung tâm tin học Giáo dục phát triển toàn cầu ",
+    description: "Trang web chính thức của Trung tâm tin học Giáo dục phát triển toàn cầu (ERG), cung cấp các khóa học, tài nguyên và dịch vụ liên quan đến công nghệ thông tin và giáo dục.",
+    images: [],
   },
 };
 
