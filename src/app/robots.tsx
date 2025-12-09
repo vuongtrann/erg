@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
   // Thay thế bằng domain thực tế của bạn
-  const baseUrl = 'https://website-cua-ban.com' 
+  const baseUrl = 'https://erg.edu.vn' 
 
   return {
     rules: {
