@@ -1,41 +1,51 @@
-import { MetadataRoute } from 'next'
 
-// Giả sử đây là hàm lấy danh sách bài viết từ API hoặc Database của bạn
-// Bạn cần thay thế bằng hàm thực tế bạn đang dùng để fetch data
-async function getAllBlogSlugs() {
-  // Ví dụ return: [{ slug: 'hoc-nextjs-co-ban', updatedAt: '2023-12-01' }, ...]
-  // return await fetch('https://api.cua-ban.com/posts').then(res => res.json())
-  return [] 
-}
+import { MetadataRoute } from 'next';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://erg.edu.vn' // Thay domain thật của bạn vào đây
+export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = 'https://erg.edu.vn'; // Thay bằng domain thật
 
-  // 1. Các trang tĩnh (Static Pages) - Dựa trên folder structure của bạn
-  const staticRoutes = [
-    '',             // Trang chủ
-    '/gioi-thieu',
-    '/khoa-hoc',
-    '/lo-trinh',
-    '/tin-tuc',
-    '/lien-he',
-    '/giao-vien',
-  ].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: 'monthly' as const,
-    priority: route === '' ? 1 : 0.8, // Trang chủ ưu tiên cao nhất
-  }))
-
-  // 2. Các trang động (Dynamic Pages) - Ví dụ cho bài viết tin tức
-  const blogPosts = await getAllBlogSlugs()
-  const dynamicRoutes = blogPosts.map((post: any) => ({
-    url: `${baseUrl}/tin-tuc/${post.slug}`,
-    lastModified: new Date(post.updatedAt),
-    changeFrequency: 'weekly' as const,
-    priority: 0.7,
-  }))
-
-  // Gộp cả 2 lại
-  return [...staticRoutes, ...dynamicRoutes]
+  return [
+    {
+      url: baseUrl,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 1,
+    },
+    {
+      url: `${baseUrl}/gioi-thieu`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/khoa-hoc`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    {
+      url: `${baseUrl}/lo-trinh`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/giao-vien`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
+      url: `${baseUrl}/tin-tuc`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/lien-he`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly',
+      priority: 0.6,
+    },
+  ];
 }
