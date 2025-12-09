@@ -8,6 +8,8 @@ import Footer from "@/components/Footer";
 import FloatingContact from "@/components/FloatingContact";
 import AdsPopup from "@/components/AdsPopup";
 import JsonLd from "@/components/JsonLd"; // Import component cấu trúc dữ liệu
+import { GoogleAnalytics } from "@next/third-parties/google"; // Import thư viện GA
+
 
 // const inter = Inter({ subsets: ["latin", "vietnamese"] });
 
@@ -156,6 +158,7 @@ export default function RootLayout({
         
         <FloatingContact />
         <Footer />
+        <GoogleAnalytics gaId="G-PF00V6RJDD" />
       </body>
     </html>
   );
