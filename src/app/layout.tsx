@@ -142,6 +142,7 @@ export default function RootLayout({
     <html lang="vi">
       <head>
         <JsonLd /> {/* Thêm component cấu trúc dữ liệu JSON-LD vào head */}
+        <GoogleAnalytics gaId="G-PF00V6RJDD" />
       </head>
       <body 
         className={`${inter.className} bg-gray-50 text-slate-800 antialiased flex flex-col min-h-screen overflow-x-hidden`} 
@@ -158,7 +159,6 @@ export default function RootLayout({
         
         <FloatingContact />
         <Footer />
-        <GoogleAnalytics gaId="G-PF00V6RJDD" />
       </body>
     </html>
   );
