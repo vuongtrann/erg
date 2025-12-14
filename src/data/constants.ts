@@ -9,6 +9,7 @@ export const NAV_ITEMS: NavItem[] = [
   { label: 'Đội ngũ giáo viên', path: '/giao-vien' },
   { label: 'Tin tức', path: '/tin-tuc' },
   { label: 'Liên hệ', path: '/lien-he' },
+  { label: 'Tuyển dụng', path: '/tuyen-dung' },
 ];
 
 export const HERO_SLIDES = [
@@ -99,7 +100,7 @@ export const TEACHERS: Teacher[] = [
     id: 't1',
     name: 'Ngô Xuân Trúc',
     subject: 'Tin học',
-    image: '/teacher/ngoxuantruc.jpg',
+    image: '/teacher/ngoxuantruc.png',
     bio: '10 năm kinh nghiệm giảng dạy tại các trường chuyên, tác giả nhiều đầu sách tham khảo.',
   },
   {
@@ -120,7 +121,7 @@ export const TEACHERS: Teacher[] = [
     id: 't4',
     name: 'Trần Thanh Nhã',
     subject: 'Tin học',
-    image: '/teacher/tranthanhnha.jpg',
+    image: '/teacher/tranthanhnha.png',
     bio: 'Chuyên gia luyện thi Olympic, nhiệt huyết và tận tâm với học sinh.',
   },
 ];
