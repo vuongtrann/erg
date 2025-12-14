@@ -46,3 +46,46 @@ export interface RoadmapSection {
   title: string;
   items: string[];
 }
+
+export interface JobItem {
+    id: number;
+    title: string;
+    salary: string; // Mức lương: "8 - 20 triệu/tháng", "Thỏa thuận"
+    quantity: string; // Số lượng: "1", "Không giới hạn"
+    workSchedule: string; // Thời gian làm việc: "8h/ngày từ thứ Hai đến thứ Bảy"
+    deadline: string; // Hạn nộp: "30/11/2024"
+    requirements: string[]; // Điều kiện/yêu cầu công việc
+    // Thông tin bổ sung để tạo độ chân thực
+    location: string;
+    descriptionShort: string;
+    isUrgent: boolean;
+}
+export interface JobSummary {
+    id: string;
+    slug: string;
+    title: string;
+    salary: string;
+    quantity: string;
+    workSchedule: string;
+    deadline: string;
+    location: string; // Đã thêm location vào type này cho khớp với UI
+    requirements: string[];
+}
+
+export interface JobDetail {
+    title: string;
+    postDate: string;
+    salary: string;
+    quantity: string;
+    workType: string;
+    deadline: string;
+    location: string;
+    summary: string;
+    jobDescription: string[];
+    requirements: string[];
+    benefits: string[];
+    quickInfo: {
+        location: string;
+        position: string;
+    };
+}

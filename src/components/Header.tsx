@@ -60,16 +60,16 @@ const Header: React.FC = () => {
             <Link href="/" className="flex items-center gap-3 group">
               <div className="flex-shrink-0">
                 <Image 
-                  src="/erg.webp" 
+                  src="/erg.png" 
                   alt="ERG Logo" 
-                  width={80} 
-                  height={36} 
-                  className="object-contain w-auto h-[36px] md:h-[40px]" 
+                  width={100} 
+                  height={56} 
+                  className="object-contain w-auto h-[56px] md:h-[60px]" 
                   priority
                 />
               </div>
               <div className="flex flex-col">
-                <h1 className="text-xl md:text-2xl font-bold text-blue-900 leading-none">Edurise Global</h1>
+                <h1 className="text-xl md:text-2xl font-bold text-[#010089] leading-none">Edurise Global</h1>
                 <p className="text-[10px] md:text-xs text-gray-500 font-medium tracking-wider">Learn today, Lead tomorrow</p>
               </div>
             </Link>
