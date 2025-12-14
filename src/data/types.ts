@@ -60,23 +60,26 @@ export interface JobItem {
     descriptionShort: string;
     isUrgent: boolean;
 }
-
-// Định nghĩa cấu trúc cho Job Card (dùng trong trang danh sách)
 export interface JobSummary {
     id: string;
-    slug: string; // Dùng cho URL trang chi tiết
+    slug: string;
     title: string;
     salary: string;
     quantity: string;
     workSchedule: string;
     deadline: string;
+    location: string; // Đã thêm location vào type này cho khớp với UI
     requirements: string[];
 }
 
-// Định nghĩa cấu trúc cho Job Detail (dùng trong trang chi tiết)
 export interface JobDetail {
     title: string;
     postDate: string;
+    salary: string;
+    quantity: string;
+    workType: string;
+    deadline: string;
+    location: string;
     summary: string;
     jobDescription: string[];
     requirements: string[];
