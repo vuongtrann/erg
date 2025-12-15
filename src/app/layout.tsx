@@ -53,6 +53,7 @@ export const metadata: Metadata = {
     "erg", 
     "erg edu vn", 
     "edurise",
+    "edurise viet nam","edurise tin hoc", "iig","iig ic3",
     "edurise global",
     "trung tâm tin học erg", 
     "hệ thống giáo dục erg",
@@ -74,6 +75,7 @@ export const metadata: Metadata = {
     "microsoft office specialist",
     "mos 2019",
     "mos 365",
+    "erg tuyển dụng","erg giáo viên tin học","erg giao vien", "erg tro giang", "erg trợ giảng","erg it","erg tuyen dung",
     ""
   ],
   authors: [{ name: "ERG Education System", url: BASE_URL }],
