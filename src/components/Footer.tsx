@@ -72,9 +72,13 @@ const Footer: React.FC = () => {
                 </div>
               <li className="flex items-center gap-3">
                 <Phone size={20} className="text-blue-500 shrink-0" />
-                <a href="tel:0766144888" className="hover:text-white transition-colors">0967.689.259</a>
+                <a href="tel:0967689259" className="hover:text-white transition-colors">0967.689.259</a>
               </li>
-              
+
+                <li className="flex items-center gap-3">
+                    <Mail size={20} className="text-blue-500 shrink-0" />
+                    <a href="mailto:info.eduerg@gmail.com" className="hover:text-white transition-colors">ic3.erg@gmail.com</a>
+                </li>
             </ul>
           </div>
         </div>

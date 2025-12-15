@@ -73,6 +73,7 @@ export interface JobSummary {
 }
 
 export interface JobDetail {
+    employer: string;
     title: string;
     postDate: string;
     salary: string;
@@ -88,4 +89,14 @@ export interface JobDetail {
         location: string;
         position: string;
     };
+}
+export interface EmployerInfo {
+    name: string;
+    nameOfOrganization: string; //tên tổ chức
+    tax: string;
+    mainAddress: string;
+    location: string;
+    fieldOfActivity: string[];
+
+
 }
