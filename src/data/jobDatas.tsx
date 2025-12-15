@@ -132,9 +132,11 @@ const JOB_DATABASE: Record<string, JobDetail> = {
         summary: "Tìm kiếm nhân viên IT chịu trách nhiệm vận hành hệ thống mạng, hỗ trợ kỹ thuật cho văn phòng và các cơ sở đào tạo.",
 
         jobDescription: [
-            "Cài đặt, cấu hình và bảo trì hệ thống máy tính, mạng LAN/WAN, Wifi tại văn phòng.",
-            "Hỗ trợ người dùng (user) khắc phục các sự cố về phần cứng, phần mềm, máy in.",
-            "Quản lý tài sản thiết bị CNTT của công ty.",
+            "Cài đặt, cấu hình và bảo trì hệ thống máy tính, mạng LAN/WAN, Wifi cho dự án và các đơn vị đối tác",
+            "Set up các phòng học vi tính, hệ thống mạng,...",
+            "Xử lý các sự cố máy tính về phần cứng & phần mềm",
+            "Quản lý các thiết bị, cơ sở vật chất, bảo trì, nâng cấp, cơ sở vật chất.",
+            "Hỗ trợ các công việc về kỹ thuật của Công ty. ",
             "Đảm bảo an toàn dữ liệu và bảo mật hệ thống."
         ],
         requirements: [
